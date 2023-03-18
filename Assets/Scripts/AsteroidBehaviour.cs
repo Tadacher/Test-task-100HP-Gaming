@@ -31,7 +31,7 @@ public class AsteroidBehaviour : MonoBehaviour
     void Update()
     {
         transform.Translate((playerBase.position - transform.position).normalized * speed * Time.deltaTime, Space.World);
-        transform.eulerAngles += Vector3.forward * rotationSpeed;
+        transform.eulerAngles += Vector3.forward * rotationSpeed*Time.deltaTime;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
