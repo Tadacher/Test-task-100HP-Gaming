@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &194470602110643905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 194470602110643904}
+  - component: {fileID: 4926683933382608241}
+  m_Layer: 0
+  m_Name: SceneBootstrapper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &194470602110643904
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194470602110643905}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8029923, y: -0.859537, z: -0.1900766}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4926683933382608241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194470602110643905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10992a2ff1204ba45b635c8877817c20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalSettings: {fileID: 11400000, guid: ff6b48192b89735458421051a370a0e1, type: 2}
+  playerBasePrefab: {fileID: 9130873838929720439, guid: 4680354b704d94740ae2d83ef359b1b0, type: 3}
+  asteroidFactoryPrefab: {fileID: 1971153235203915630, guid: ad63c33b051d8a148b5276cdd2c27c72, type: 3}
+  audioManagerPrefab: {fileID: 1315960126050335331, guid: 23341858b0d944449b95d83bae3ab698, type: 3}
+  missileFactoryPrefab: {fileID: 7942661520086080191, guid: 4630025949cfcc84b9bef80223636514, type: 3}
+  economicsManagerPrefab: {fileID: 9101929760570059929, guid: 0a2b2a45d1fbab64580bdc3a4d111d2b, type: 3}
+  upgradeManagerPrefab: {fileID: 3032140795608915706, guid: 00fe09864b8351f45be8bb143485cf16, type: 3}
+  uImanagerPrefab: {fileID: 6926061253414633112, guid: b98440d8699484748bc61514de1af87f, type: 3}
+  canvasRefsContainerPrefab: {fileID: 6189030956508109362, guid: 5d3e370ece98fc94d933e4f1caacf9f8, type: 3}
+  lineRendererPrefab: {fileID: 9021830068568897028, guid: dcf185538f166994ba8191a9fa65eb22, type: 3}
+  gameStateMachinePrefab: {fileID: 57515987492275952, guid: 3a62fd37cbc062940948b44460b51695, type: 3}
+  gfxManagerPrefab: {fileID: 8535807474125030053, guid: dba13bcfe8713084aae65a0ea532fe21, type: 3}
