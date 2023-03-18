@@ -3,7 +3,7 @@
 
 
 ## The task:
- - develop a working prototype of the game on Unity, focusing on the basic mechanics of the game "Tower - inactive tower defense", as a reference
+ - develop a working prototype of the game on Unity, focusing on the basic mechanics of the game "Tower - inactive tower defense", as a reference.
 
  Essential mechanics: 
  - The presence of a base object on which enemies are approaching;
@@ -22,6 +22,13 @@
 ![image](https://user-images.githubusercontent.com/51299789/226111114-7439116c-6054-45a8-beb4-73e273dcbdd6.png)
 
 ## About
-- Use GlobalSettings at /Resources to set up vital ingame variables and balance the game
-- Use prefabs at/Resources/Prefabs/Infrastructure for a fine tuning game aspects 
-- Post your issues if you found any bugs or if you got an advice about code/architecture/whatever
+- Use GlobalSettings at /Resources to set up vital ingame variables and balance the game;
+- Use prefabs at/Resources/Prefabs/Infrastructure for a fine tuning game aspects;
+- Post your issues if you found any bugs or if you got an advice about code/architecture/whatever.
+
+## Used assets(for informational or parody purposes only): 
+- Pixel Planet Generator https://deep-fold.itch.io/pixel-planet-generator;
+- Space Background generator https://deep-fold.itch.io/space-background-generator;
+- Music and sfx - "Space Rangers" game series;
+- Cartoon FX https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-remaster-free-109565;
+- Asteroid and GuI from some kind guys from the Internet.
