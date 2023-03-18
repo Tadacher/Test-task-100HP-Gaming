@@ -17,7 +17,7 @@
  - Each upgrade type can be upgraded 2-3 times;
  - Any freely available sprites and animations can be used as game graphics.
  
-![image](https://user-images.githubusercontent.com/51299789/226110828-1ce87606-0804-4200-b27b-a86f08130f58.png)
+ ![image](https://user-images.githubusercontent.com/51299789/226110828-1ce87606-0804-4200-b27b-a86f08130f58.png)
 ![image](https://user-images.githubusercontent.com/51299789/226111057-78b38e45-8dad-484a-b42f-088ca2a05de3.png)
 ![image](https://user-images.githubusercontent.com/51299789/226111114-7439116c-6054-45a8-beb4-73e273dcbdd6.png)
 
