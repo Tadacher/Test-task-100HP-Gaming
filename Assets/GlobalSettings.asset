@@ -17,3 +17,4 @@ MonoBehaviour:
   playerBehaviourSettings: {fileID: 11400000, guid: ca18cd1c1a8754441a0e6c05f6ce69e0, type: 2}
   missilefactorySettings: {fileID: 11400000, guid: d737216b619eb42489a77d3e79f2cd84, type: 2}
   economicsManagerSettings: {fileID: 11400000, guid: e080f36ce74ea6842a6eb87c554b5d14, type: 2}
+  audioSetup: {fileID: 11400000, guid: e0c3991d1b706f04986070c67161254b, type: 2}
