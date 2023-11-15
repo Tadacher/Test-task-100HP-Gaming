@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f70b5d3aac40266489e9d073a1f7e285, type: 3}
   m_Name: MissileFactoryBehaviourSettings
   m_EditorClassIdentifier: 
-  missilePrefab: {fileID: 4961304836708429654, guid: b0a4e4dbc7fd44f46994287afac56b5a, type: 3}
+  missilePrefab: {fileID: 576302675810099846, guid: b0a4e4dbc7fd44f46994287afac56b5a, type: 3}
   missileSpeed: 2.5

@@ -19,3 +19,6 @@ MonoBehaviour:
   spawnPeriod: 4
   rotaionSpeed: 2
   periodDecreasePerSec: 0.05
+  Prefab: {fileID: 498609191131569608, guid: bd04d38a1b59fd4479cb2527bec6675c, type: 3}
+  Sprites:
+  - {fileID: 21300024, guid: 1bd6c74c058d5f143a391104c445e845, type: 3}

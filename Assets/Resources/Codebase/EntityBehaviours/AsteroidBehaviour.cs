@@ -1,65 +1,69 @@
 using UnityEngine;
-using Events;
 
 public class AsteroidBehaviour : MonoBehaviour
 {
-    public float rotationSpeed;
-    public int hitPonts;
-    public int damage;
-    public float speed;
+    private const string _playerTag = "Player";
+    private float _rotationSpeed;
+    private int _hitPonts;
+    private int _damage;
+    private float _speed;
 
-
-    public event OnAsteroidDeath OnPaidDeath;
-    public event OnAsteroidDeath OnUnpaidEvent;
-
-    Transform playerBase;
-    public Transform PlayerBase
+    private Transform _target;
+    private AudioService _audioService;
+    private EconomicService _economicService;
+    public void Initialize(AsteroidSettings asteroidSettings, Transform target, AudioService audioService, EconomicService economicService)
     {
-        private get => playerBase;
-        set
-        {
-            if (playerBase == null)
-                playerBase = value;
-            else 
-                Debug.LogWarning("Multiple attemts to set target position!");
-        }
+        _audioService = audioService;
+        _economicService = economicService;
+
+        _rotationSpeed = asteroidSettings.rotaionSpeed;
+        _hitPonts = asteroidSettings.hp;
+        _damage = asteroidSettings.damage;
+        _speed = asteroidSettings.asteroidSpeed;
+        _target = target;
     }
 
     void Update()
     {
-        MoveObject();
-        RotateObject();
+        Move();
+        Rotate();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag is "Player")
-        {
-            collision.gameObject.GetComponent<PlayerBaseBehaviour>().RecieveDamage(damage);
-            UnpaidDeath();
-        }
+        if (collision.gameObject.tag is not _playerTag)
+            return;
+
+        collision.gameObject.GetComponent<PlayerBaseBehaviour>().RecieveDamage(_damage);
+        UnpaidDeath();
     }
+
     public void RecieveDamage(int damage)
     {
-        hitPonts -= damage;
-        if (hitPonts <= 0) PaidDeath();
+        _hitPonts -= damage;
+
+        if (_hitPonts <= 0) 
+            PaidDeath();
     }
-    private void RotateObject() => 
-        transform.eulerAngles += rotationSpeed * Time.deltaTime * Vector3.forward;
-
-
-    private void MoveObject() => 
-        transform.Translate(speed * Time.deltaTime * (playerBase.position - transform.position).normalized, Space.World);
+    public void SetRotaion(float rotationSpeed) 
+        => _rotationSpeed = rotationSpeed;
+    private void Rotate()
+        => transform.eulerAngles += _rotationSpeed * Time.deltaTime * Vector3.forward;
+    private void Move() 
+        => transform.Translate(_speed * Time.deltaTime * (_target.position - transform.position).normalized, Space.World);
 
     private void UnpaidDeath()
     {
-        OnUnpaidEvent?.Invoke();
+        PlayDeathSound();
         Destroy(gameObject);
     }
-
     private void PaidDeath()
     {
-        OnPaidDeath?.Invoke();
+        _economicService.CountIncome();
+        PlayDeathSound();
         Destroy(gameObject);
     }
+    private void PlayDeathSound()
+        => _audioService.PlayAsteroidDeathSound();
+
 }

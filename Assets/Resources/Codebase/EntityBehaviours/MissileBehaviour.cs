@@ -2,49 +2,53 @@ using UnityEngine;
 
 public class MissileBehaviour : MonoBehaviour
 {
-    private float speed;
-    private int damage;
+    private float _speed;
+    private int _damage;
+
+    private ParticleFactory _particleFactory;
+    private AudioService _audioService;
     private Transform _target;
-    private Vector2 lookDirection;
-    internal event Events.OnMissileDestroyed OnMissileDestroyed;
-    private void Update()
-    {
-        if (_target != null)
-            MoveObjectToTarget();
-        else
-        {
-            transform.Translate(Vector3.up * speed * Time.deltaTime, Space.World);
-            SelfDestruct();
-        }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag is "Asteroid")
-        {
-            collision.gameObject.GetComponent<AsteroidBehaviour>().RecieveDamage(damage);
-            OnMissileDestroyed?.Invoke(transform);
-            Destroy(gameObject);
-        }
-    }
+    private Vector2 _lookDirection; //daffuck?
 
-    private void MoveObjectToTarget() => 
-        transform.Translate(speed * Time.deltaTime * (_target.position - transform.position).normalized, Space.World);
-
-    public void Initialize(float _speed, int _damage)
+    public void Initialize(float speed, int damage, AudioService audioService, ParticleFactory particleFactory)
     {
-            speed = _speed;
-            damage = _damage;                
+        _speed = speed;
+        _damage = damage;
+        _particleFactory = particleFactory;
+        _audioService = audioService;
     }
     public void SetTarget(Transform target)
     {
         _target = target;
-        lookDirection = _target.position - transform.position;
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, lookDirection);
+        _lookDirection = _target.position - transform.position;
+        transform.rotation = Quaternion.LookRotation(Vector3.forward, _lookDirection);
     }
 
-    void SelfDestruct()
+    private void Update()
     {
-        OnMissileDestroyed?.Invoke(transform);
-        Destroy(gameObject);     
+        if (_target == null)
+            SelfDestruct();
+
+        MoveObjectToTarget();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag is not "Asteroid")
+            return;
+
+        collision.gameObject.GetComponent<AsteroidBehaviour>().RecieveDamage(_damage);
+        DestroySelf();
+    }
+
+    private void MoveObjectToTarget() => 
+        transform.Translate(_speed * Time.deltaTime * (_target.position - transform.position).normalized, Space.World);
+
+    private void SelfDestruct() => 
+        DestroySelf();
+
+    private void DestroySelf()
+    {
+        _particleFactory.SpawnExplosion(transform);
+        Destroy(gameObject);
     }
 }

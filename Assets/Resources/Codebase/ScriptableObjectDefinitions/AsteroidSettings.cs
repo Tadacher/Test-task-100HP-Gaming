@@ -6,11 +6,13 @@ using UnityEngine;
 
 public class AsteroidSettings : ScriptableObject
 {
-    [SerializeField] internal int hp;
-    [SerializeField] internal int damage;
-    [SerializeField] internal float spawnRadius;
-    [SerializeField] internal float asteroidSpeed;
-    [SerializeField] internal float spawnPeriod;
-    [SerializeField] internal float rotaionSpeed;
-    [SerializeField] internal float periodDecreasePerSec;
+    public int hp;
+    public int damage;
+    public float spawnRadius;
+    public float asteroidSpeed;
+    public float spawnPeriod;
+    public float rotaionSpeed;
+    public float periodDecreasePerSec;
+    public AsteroidBehaviour Prefab;
+    public Sprite[] Sprites;
 }

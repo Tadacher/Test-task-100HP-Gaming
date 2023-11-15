@@ -1,36 +1,31 @@
 using UnityEngine;
-using Events;
 
 public class MissileFactory : AbstractMonoBehaviuorFactory<MissileBehaviour>
 {
-    private event OnMissileLaunched _onMissileLaunched;
-    public MissileBehaviour LastGetted { get; private set; }
+    private MissileBehaviour _missilePrefab;
 
-    public OnMissileDestroyed _onMissileDestroyedHandlers;
-
-    private GameObject _missilePrefab;
+    //product dependencies
+    private AudioService _audioService;
+    private ParticleFactory _particleFactory;
     private float _speed;
     private int damage;
-    private MissileBehaviour missileBehaviour;
-
-
+ 
     public MissileFactory(MissilefactorySettings missilefactorySettings, AudioService audioService, ParticleFactory particleFactory) : base()
     {
         _missilePrefab = missilefactorySettings.missilePrefab;
         _speed = missilefactorySettings.missileSpeed;
-        _onMissileLaunched += audioService.MissileLaunchedSoundHandlers;
-        _onMissileDestroyedHandlers += particleFactory._onMissileDestroyedGfxHandlers;
     }
 
-    internal void SetDamage(int _damage) => damage = _damage;
+    public void SetDamage(int _damage) 
+        => damage = _damage;
 
     protected override MissileBehaviour ConstructNew()
     {
-        missileBehaviour = GameObject.Instantiate(_missilePrefab, null).GetComponent<MissileBehaviour>();
-        missileBehaviour.OnMissileDestroyed += _onMissileDestroyedHandlers;
-        _onMissileLaunched?.Invoke();
+        MissileBehaviour missileBehaviour = GameObject.Instantiate(_missilePrefab, null);
+        missileBehaviour.Initialize(_speed, damage, _audioService, _particleFactory);
         return missileBehaviour;
     }
 
-    public override MissileBehaviour GetFromPool() => _pool.Get();
+    public override MissileBehaviour GetFromPool() 
+        => _pool.Get();
 }

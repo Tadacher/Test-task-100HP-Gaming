@@ -115,9 +115,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4961304836708429652}
   - component: {fileID: 4961304836708429655}
-  - component: {fileID: -2791218594822112725}
   - component: {fileID: 760990908200888296}
   - component: {fileID: 1015691308101203027}
+  - component: {fileID: 576302675810099846}
   m_Layer: 0
   m_Name: MissileContainer
   m_TagString: Untagged
@@ -193,18 +193,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-2791218594822112725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4961304836708429654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21ba97b790041304594570976c976da3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &760990908200888296
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -242,3 +230,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &576302675810099846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4961304836708429654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1616031ca18c57942ae9fb781fb0512c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

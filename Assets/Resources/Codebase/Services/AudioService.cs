@@ -15,22 +15,17 @@ public class AudioService
         _themeSource = audioSource;
 
         _audioSetup = audioSetup;
-        _asteroidDeathSoundHandlers += PlayAsteroidDeathSound;
-        _upgradeBoughtSoundHandlers += PlayBuySound;
-        MissileLaunchedSoundHandlers += PlayMissileLaunchSound;
         _themeSource.clip = _audioSetup._theme;
         _themeSource.Play();
     }
 
-    internal OnAsteroidDeath _asteroidDeathSoundHandlers;
-    internal OnUpgradeBought _upgradeBoughtSoundHandlers;
-    internal OnMissileLaunched MissileLaunchedSoundHandlers;
-
-    void PlayAsteroidDeathSound() => 
+    public void PlayOneShot(AudioClip clip) => 
+        _audioSource.PlayOneShot(clip);
+    public void PlayAsteroidDeathSound() => 
         _audioSource.PlayOneShot(_audioSetup._asteroidDeathSounds[Random.Range(0, _audioSetup._asteroidDeathSounds.Length - 1)], 1f);
-    void PlayBuySound() => 
+    public void PlayBuySound() => 
         _audioSource.PlayOneShot(_audioSetup._buy, 1f);
-    void PlayMissileLaunchSound() => 
+    public void PlayMissileLaunchSound() => 
         _audioSource.PlayOneShot(_audioSetup._missileLaunch, 1f);
 
 }

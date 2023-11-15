@@ -3,28 +3,14 @@ using UnityEngine;
 
 public class LineRendererScript : MonoBehaviour
 {
+    public float Radius;
+
     [SerializeField] private LineRenderer circleRenderer;
     [SerializeField] private int _steps;
     private Events.OnRangeChanged rangeLevelChangedHandlers;
     private bool _inited;
-    public OnRangeChanged RangeLevelChangedHandlers
-    {
-        get
-        {
-            if (_inited)
-                return rangeLevelChangedHandlers;
-            else
-            {
-                rangeLevelChangedHandlers += RedrawCircle;
-                _inited = true;
-                return rangeLevelChangedHandlers;
-            }
-        }
 
-        set => rangeLevelChangedHandlers = value;
-    }
-
-    private void RedrawCircle(float radius)
+    public void RedrawCircle(float radius)
     {
         circleRenderer.positionCount = _steps+1;
         for(int currentStep = 0; currentStep < _steps+1; currentStep++)

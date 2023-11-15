@@ -10,23 +10,15 @@ public class PlayerBaseBehaviour : MonoBehaviour
     private Collider2D[] availableTargets;
 
 
-    private MissileFactory missileFactory;
-    public MissileFactory MissileFactory
-    {
-        get => missileFactory;
-        set
-        {
-            if (missileFactory == null) missileFactory = value;
-            else ConsoleShortCuts.FieldOverrideWarn("MissileFactory");
-        }
-    }
+    private MissileFactory _missileFactory;
     public Events.PlayerDeath OnPlayerDeath;
 
 
     [Inject]
-    public void Initialize(PlayerBehaviourSettings _playerBehaviourSettings)
+    public void Initialize(PlayerBehaviourSettings playerBehaviourSettings, MissileFactory missileFactory)
     {
-        hitPoints = _playerBehaviourSettings.hitPoints;
+        hitPoints = playerBehaviourSettings.hitPoints;
+        _missileFactory = missileFactory;
     }
 
 
@@ -54,7 +46,7 @@ public class PlayerBaseBehaviour : MonoBehaviour
         if (hitPoints <= 0) OnPlayerDeath?.Invoke();
     }
 
-    public void LaunchMisile(Transform target) => MissileFactory.GetFromPool().SetTarget(target);
+    public void LaunchMisile(Transform target) => _missileFactory.GetFromPool().SetTarget(target);
     public void SetRange(float _range) => range = _range;
     public void SetAttackSpeed(float period) => launchPeriod = period;
 

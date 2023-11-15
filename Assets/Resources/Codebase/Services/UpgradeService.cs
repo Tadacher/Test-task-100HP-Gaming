@@ -1,5 +1,4 @@
 using UnityEngine;
-using Events;
 public class UpgradeService
 {
     public int DamageLevel { get; private set; }
@@ -9,28 +8,24 @@ public class UpgradeService
     public enum UpgradeType { Damage, Range, AttackSpeed }
 
     public UpgraderSettings UpgraderSettings;
-
-    private event OnDamageLevelChanged _ondamageLevelChanged;
-    private event OnRangeLevelChanged _onRangeLevelChanged;
-    private event OnAttackspeedLevelChanged _onAttackspeedLevelChanged;
-    private event OnRangeChanged _onrangeChanged;
-    private event OnUpgradeBought _onupgradeBought;
     private PlayerBaseBehaviour _playerBaseBehaviour;
-
+    private LineRendererScript _lineRenderer;
     private MissileFactory _missileFactory;
-   
+    private UIService _uiService;
 
-    public UpgradeService(MissileFactory missilefactory, PlayerBaseBehaviour playerbaseBehaviour, UpgraderSettings upgraderSettings, AudioService audioService, UIService _uIService, LineRendererScript lineRenderer)
+
+    public UpgradeService(MissileFactory missilefactory,
+                          PlayerBaseBehaviour playerbaseBehaviour,
+                          UpgraderSettings upgraderSettings,
+                          LineRendererScript lineRenderer,
+                          UIService uIService)
     {
-        _onupgradeBought += audioService._upgradeBoughtSoundHandlers;
-        _ondamageLevelChanged += _uIService._damageLevelChangedHandlers;
-        _onRangeLevelChanged += _uIService._rangeLevelChangedHandlers;
-        _onAttackspeedLevelChanged += _uIService._attackspeedLevelChangedHandlers;
-        _onrangeChanged += lineRenderer.RangeLevelChangedHandlers;
-
+        _lineRenderer = lineRenderer;
+        _uiService = uIService;
         UpgraderSettings = upgraderSettings;
         _missileFactory = missilefactory;
         _playerBaseBehaviour = playerbaseBehaviour;
+
         _playerBaseBehaviour.SetAttackSpeed(UpgraderSettings.initialAttackSpeed);
         _playerBaseBehaviour.SetRange(UpgraderSettings.initialRange);
         _missileFactory.SetDamage(UpgraderSettings.initialDamage);
@@ -40,23 +35,20 @@ public class UpgradeService
         switch (upgradeType)
         {
             case UpgradeType.Damage:
-                _onupgradeBought.Invoke();
                 DamageLevel++;
                 _missileFactory.SetDamage(UpgraderSettings.initialDamage + UpgraderSettings.damagePerGrade * DamageLevel);
-                _ondamageLevelChanged?.Invoke(DamageLevel);
+                _uiService.DrawDamageLevel(DamageLevel);
                 break;
             case UpgradeType.Range:
                 RangeLevel++;
-                _onupgradeBought.Invoke();
                 _playerBaseBehaviour.SetRange(UpgraderSettings.initialRange + UpgraderSettings.rangePerLevel * RangeLevel);
-                _onRangeLevelChanged?.Invoke(RangeLevel);
-                _onrangeChanged?.Invoke(UpgraderSettings.initialRange + UpgraderSettings.rangePerLevel * RangeLevel);
+                _lineRenderer.RedrawCircle(UpgraderSettings.initialRange + UpgraderSettings.rangePerLevel * RangeLevel);
+                _uiService.DrawRangeLevel(RangeLevel);
                 break;
             case UpgradeType.AttackSpeed:
                 AttackSpeedLevel++;
-                _onupgradeBought.Invoke();
                 _playerBaseBehaviour.SetAttackSpeed(UpgraderSettings.initialAttackSpeed * Mathf.Pow(UpgraderSettings.attackSpeedDecreaseMultiplier, AttackSpeedLevel));
-                _onAttackspeedLevelChanged?.Invoke(AttackSpeedLevel);
+                _uiService.DrawAttackSpeedLevel(AttackSpeedLevel);
                 break;                
         }
     }
@@ -64,7 +56,6 @@ public class UpgradeService
     {
         switch (upgradeType)
         {
-
             case UpgradeType.Damage:
                 return DamageLevel;
             case UpgradeType.Range:
