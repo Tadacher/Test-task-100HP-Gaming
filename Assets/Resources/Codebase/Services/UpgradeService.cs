@@ -11,14 +11,14 @@ public class UpgradeService
     private PlayerBaseBehaviour _playerBaseBehaviour;
     private LineRendererScript _lineRenderer;
     private MissileFactory _missileFactory;
-    private UIService _uiService;
+    private GameplayUIService _uiService;
 
 
     public UpgradeService(MissileFactory missilefactory,
                           PlayerBaseBehaviour playerbaseBehaviour,
                           UpgraderSettings upgraderSettings,
                           LineRendererScript lineRenderer,
-                          UIService uIService)
+                          GameplayUIService uIService)
     {
         _lineRenderer = lineRenderer;
         _uiService = uIService;

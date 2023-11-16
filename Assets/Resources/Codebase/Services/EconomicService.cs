@@ -6,10 +6,10 @@ public class EconomicService
 {
     private EconomicsManagerSettings _economicsManagerSettings;
     private UpgradeService _upgradeService;
-    private UIService _uIService;
+    private GameplayUIService _uIService;
  
     public int balance;
-    public EconomicService(UpgradeService upgradeManager, EconomicsManagerSettings economicsManagerSettings, UIService UiService, CanvasRefsContainer canvasRefsContainer)
+    public EconomicService(UpgradeService upgradeManager, EconomicsManagerSettings economicsManagerSettings, GameplayUIService UiService, CoreGameplayUiContainer canvasRefsContainer)
     {
         canvasRefsContainer.damageUpgrade.onClick.AddListener(() => BuyUpgrade(UpgradeService.UpgradeType.Damage));
         canvasRefsContainer.rangeUpgrade.onClick.AddListener(() => BuyUpgrade(UpgradeService.UpgradeType.Range));

@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using Zenject;
 
 public class SceneMonoInstaller : AbstractMonoInstaller
 {
@@ -10,14 +8,16 @@ public class SceneMonoInstaller : AbstractMonoInstaller
     [SerializeField] private PlayerBaseBehaviour _playerBase;
     [SerializeField] private LineRendererScript _lineRenderer;
 
-
-
-    [SerializeField] private CanvasRefsContainer _canvasRefsContainerPrefab;
-    private CanvasRefsContainer _canvasRefsContainer;
+    [SerializeField] private CoreGameplayUiContainer _gameplayCanvas;
+    [SerializeField] private MetaUiContainer _metaUiContainer;
 
     public override void InstallBindings()
     {
         BindUnityComponentFromInstance(_audioSource);
+
+        BindUnityComponentFromInstance(_gameplayCanvas);
+        BindUnityComponentFromInstance(_metaUiContainer);
+
 
         BindMonobehaviourService(_coroutineRunner);
         BindMonobehaviourService(_lineRenderer);
@@ -30,20 +30,24 @@ public class SceneMonoInstaller : AbstractMonoInstaller
         BindScriptableObject(_globalSettings.missilefactorySettings);
         BindScriptableObject(_globalSettings.economicsManagerSettings);
 
-
+        //misc
         BindService<AudioService>();
-        BindService<AsteroidFactory>();
-        BindService<MissileFactory>();
         BindService<UpgradeService>();
-        BindService<UIService>();
-        BindService<GameStateMachine>();
-        BindService<ParticleFactory>();
         BindService<EconomicService>();
+
+        //factories
+        BindService<MissileFactory>();
+        BindService<AsteroidFactory>();
+        BindService<ParticleFactory>();
+        //GUI
+        BindService<GameplayUIService>();
+        BindService<MetaUiService>();
+        //Infrastructure
+        BindService<GameStateMachine>();
         BindService<GameLoopService>();
 
-        BindMonobehaviourServiceFromNew(_canvasRefsContainerPrefab);
 
-        PostinitPhase();
+       // PostinitPhase();
     }
 
     private void PostinitPhase()

@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CanvasRefsContainer : MonoBehaviour
+public class CoreGameplayUiContainer : MonoBehaviour
 {
-    public GameObject ingameLayer;
+    public GameObject GameplayUiLayer;
     public Button 
         attackSpeedUpgrade, 
         damageUpgrade, 
@@ -16,11 +16,11 @@ public class CanvasRefsContainer : MonoBehaviour
         rangeLvl, 
         balance;
 
-    public GameObject menuLayer;
+    public GameObject GameMenuLayer;
     public Button 
-        play, 
-        restart;
+       ContinueGameVtn, 
+       ToMenu;
 
-    public GameObject loseScreen;
-    public Button loseScreenRestart;
+    public GameObject LoseScreen;
+    public Button LoseScreenToMenu;
 }
